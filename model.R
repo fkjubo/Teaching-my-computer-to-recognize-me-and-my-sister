@@ -33,7 +33,7 @@ test <- list()
 
 for(i in 1:22) {test[[i]] <- readImage(picTest[i])}
 
-# resizing the dimension of images
+# resizing the dimension of images to minimize the computational requirements
 
 for(i in 1:28) {train[[i]] <- resize(train[[i]], 100, 100)}
 
@@ -63,12 +63,14 @@ test.labels <- to_categorical(test.labels)
 train <- combine(train)
 test <- combine(test)
 
-# changing the structure of the images for CNN model
+# changing the structure of the images for our CNN model
 
 train <- aperm(train, c(4,1,2,3))
 test <- aperm(test, c(4,1,2,3))
 
 # CNN
+# our model has 2 layer CNN layer
+# after CNN layer our model is connected with 3 fully connected layer with dropout function to minimize overfitting
 
 model <- keras_model_sequential()
 
